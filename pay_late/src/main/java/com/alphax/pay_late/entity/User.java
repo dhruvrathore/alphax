@@ -33,4 +33,7 @@ public class User {
     @Column(name = "walled_balance")
     private Double walletBalance;
 
+    @Column(name = "successful_transaction")
+    private Long successfulTransaction;
+
 }

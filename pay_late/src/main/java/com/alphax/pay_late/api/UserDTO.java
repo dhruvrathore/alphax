@@ -22,4 +22,5 @@ public class UserDTO {
     private String type;
     private Double credScore;
     private Double walletBalance;
+    private Long successfulTransactions;
 }

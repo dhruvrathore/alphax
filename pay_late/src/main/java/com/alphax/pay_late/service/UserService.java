@@ -32,6 +32,7 @@ public class UserService {
         userDTO.setName(user.getName());
         userDTO.setType(user.getType());
         userDTO.setWalletBalance(user.getWalletBalance());
+        userDTO.setSuccessfulTransactions(user.getSuccessfulTransaction());
         return userDTO;
     }
 }

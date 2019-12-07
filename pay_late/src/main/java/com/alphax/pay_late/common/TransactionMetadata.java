@@ -4,4 +4,7 @@ import lombok.Data;
 
 @Data
 public class TransactionMetadata {
+    private String imei;
+    private String imsi;
+    private String line1;
 }

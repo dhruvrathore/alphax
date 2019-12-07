@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "transaction")
@@ -34,6 +35,12 @@ public class Transaction {
 
     @Column(name = "money")
     private Double money;
+
+    @Column(name = "transaction_timestamp")
+    private Date transactionTimestamp;
+
+    @Column(name = "transaction_uuid")
+    private String transactionUUid;
 
     @Column(name = "metadata",columnDefinition = "json")
     private String metadata;

@@ -1,0 +1,4 @@
+insert into user(created_on, cred_score,name,type,walled_balance, successful_transaction) values(now(),3.9,'TestSender','customer',1000.0,5);
+insert into user(created_on, cred_score,name,type,walled_balance, successful_transaction) values(now(),3.9,'TestReceiver','merchant',500.0,9);
+insert into user(created_on, cred_score,name,type,walled_balance, successful_transaction) values(now(),4.9,'Darpan','merchant',1500.0,15);
+insert into user(created_on, cred_score,name,type,walled_balance, successful_transaction) values(now(),3.6,'Vishal','customer',1000.0,8);

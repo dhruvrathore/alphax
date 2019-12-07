@@ -19,6 +19,15 @@ public class UserService {
         return user.getCredScore();
     }
 
+    public Boolean updateWalletBalance(Long userId, Double amount) {
+        User user = userRepository.getOne(userId);
+        if(amount<0.0 && amount+user.getWalletBalance() < 0.0) {
+            return false;
+        }
+        user.setWalletBalance(user.getWalletBalance() + amount);
+        return true;
+    }
+
     public Double getWalletBalance(Long userId){
         User user = userRepository.getOne(userId);
         return user.getWalletBalance();

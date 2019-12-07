@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 
 @Service
@@ -17,6 +18,10 @@ public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    @Autowired
+    private UserService userService;
+
+    @Transactional
     public Boolean saveTransaction(TransactionDTO transactionDTO) {
         Transaction transaction = new Transaction();
         transaction.setCreatedOn(new Date());
@@ -24,10 +29,15 @@ public class TransactionService {
         transaction.setToUserId(transactionDTO.getToUserId());
         transaction.setMoney(transactionDTO.getMoney());
         transaction.setTransactionTimestamp(transactionDTO.getTransactionTimestamp());
-        transaction.setTransactionUUid(transactionDTO.getTransactionUUid());
+        transaction.setTransactionUUid(transactionDTO.getTransactionUuid());
         transaction.setMetadataObject(transactionDTO.getTransactionMetadata());
         transaction.setStatus(TransactionStatus.fromName(transactionDTO.getStatus()));
         transactionRepository.save(transaction);
+        Boolean isDeductionSuccessful = userService.updateWalletBalance(transactionDTO.getFromUserId(), -transaction.getMoney());
+        Boolean isAdditionSuccessful = userService.updateWalletBalance(transactionDTO.getToUserId(), transaction.getMoney());
+        if(!isDeductionSuccessful || !isAdditionSuccessful) {
+            throw new RuntimeException();
+        }
         return true;
     }
 }

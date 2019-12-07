@@ -6,13 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
+
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +17,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Transaction {
 
-    @Id @Column(name = "id") private Long id;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(
+            strategy = GenerationType.IDENTITY
+    )
+    private Long id;
 
     @Column(name = "created_on") private Date createdOn;
 
@@ -44,7 +44,7 @@ public class Transaction {
     @Transient
     private TransactionMetadata transactionMetadata;
     @Transient
-    private ObjectMapper objectMapper;
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @JsonIgnore public void setMetadataObject(TransactionMetadata transactionMetadata) {
         if (transactionMetadata != null) {

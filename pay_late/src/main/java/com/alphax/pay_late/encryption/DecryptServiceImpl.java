@@ -1,4 +1,4 @@
-package com.alphax.pay_late.Encryption;
+package com.alphax.pay_late.encryption;
 
 import com.alphax.pay_late.entity.Transaction;
 import com.fasterxml.jackson.core.JsonProcessingException;

@@ -1,4 +1,4 @@
-package com.alphax.pay_late.Encryption;
+package com.alphax.pay_late.encryption;
 
 import com.alphax.pay_late.entity.Transaction;
 import com.alphax.pay_late.model.ObjectToEncrypt;
@@ -11,9 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Slf4j
-@Service
-public class EncryptServiceImpl {
+@Slf4j @Service public class EncryptServiceImpl {
 
     @Autowired private ObjectMapper objectMapper;
     @Autowired private ObjectToEncryptService objectToEncryptService;

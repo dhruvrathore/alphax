@@ -1,12 +1,15 @@
 package com.alphax.pay_late.entity;
 
 import com.alphax.pay_late.common.TransactionMetadata;
+import com.alphax.pay_late.constants.TransactionStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
@@ -33,7 +36,9 @@ public class Transaction {
     @Column(name = "transaction_uuid") private String transactionUUid;
 
     @Column(name = "metadata", columnDefinition = "json") private String metadata;
-    @Column(name = "status", columnDefinition = "enum('SUCCESS', 'FAILURE')") private String status;
+    @Column(name = "status", columnDefinition = "enum('SUCCESS', 'FAILURE')")
+    @Enumerated(EnumType.STRING)
+    private TransactionStatus status;
 
     private TransactionMetadata transactionMetadata;
     private ObjectMapper objectMapper;

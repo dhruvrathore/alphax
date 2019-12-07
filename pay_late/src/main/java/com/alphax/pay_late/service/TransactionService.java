@@ -1,5 +1,6 @@
 package com.alphax.pay_late.service;
 
+import com.alphax.pay_late.api.TransactionDTO;
 import com.alphax.pay_late.repository.TransactionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
 
-    private Boolean saveTransaction(){
-
+    private Boolean saveTransaction(TransactionDTO transactionDTO){
+        return true;
     }
 }

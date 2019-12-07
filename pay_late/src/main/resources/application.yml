@@ -1,3 +1,6 @@
+server:
+  port: 9010
+
 hibernate:
   batch:
     size: 20

@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@Validated
-@RequestMapping("/api/v1/credibility")
-public class CredibilityScoreController {
+@RestController @Validated @RequestMapping("/api/v1/credibility") public class CredibilityScoreController {
 
     @Autowired private CredibilityScoreServiceImpl credibilityScoreService;
 

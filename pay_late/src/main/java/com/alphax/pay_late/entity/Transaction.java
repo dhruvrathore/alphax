@@ -12,6 +12,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,7 +41,9 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     private TransactionStatus status;
 
+    @Transient
     private TransactionMetadata transactionMetadata;
+    @Transient
     private ObjectMapper objectMapper;
 
     @JsonIgnore public void setMetadataObject(TransactionMetadata transactionMetadata) {
@@ -65,7 +68,7 @@ public class Transaction {
                 this.transactionMetadata = objectMapper.readValue(metadata, TransactionMetadata.class);
                 return transactionMetadata;
             }
-            catch (JsonProcessingException ex) {
+            catch (Exception ex) {
                 log.error("Error in deSerializing to json {}", transactionMetadata);
                 throw new RuntimeException(ex);
             }

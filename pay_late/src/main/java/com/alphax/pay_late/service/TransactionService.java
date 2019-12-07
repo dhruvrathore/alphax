@@ -1,6 +1,7 @@
 package com.alphax.pay_late.service;
 
 import com.alphax.pay_late.api.TransactionDTO;
+import com.alphax.pay_late.constants.TransactionStatus;
 import com.alphax.pay_late.entity.Transaction;
 import com.alphax.pay_late.repository.TransactionRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +26,7 @@ public class TransactionService {
         transaction.setTransactionTimestamp(transactionDTO.getTransactionTimestamp());
         transaction.setTransactionUUid(transactionDTO.getTransactionUUid());
         transaction.setMetadataObject(transactionDTO.getTransactionMetadata());
-        transaction.setStatus(transactionDTO.getStatus());
+        transaction.setStatus(TransactionStatus.fromName(transactionDTO.getStatus()));
         transactionRepository.save(transaction);
         return true;
     }

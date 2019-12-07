@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    url jdbc:mysql://$localhost/grabathon?useSSL=false
+    username: root
+    password: root
+    validationQuery: SELECT 1
+    testOnBorrow: true
+    initialSize: 10
+    minIdle: 10
+    maxActive: 100
+    maxIdle: 100
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

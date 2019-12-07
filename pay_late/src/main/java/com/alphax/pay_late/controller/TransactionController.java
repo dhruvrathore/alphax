@@ -19,7 +19,7 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @PostMapping("/save")
-    public Boolean saveTransaction(@RequestBody @Validated @NotNull TransactionDTO transactionDTO){
+    public Boolean saveTransaction(@RequestBody @Validated @NotNull TransactionDTO transactionDTO) throws Exception{
         return transactionService.saveTransaction(transactionDTO);
     }
 

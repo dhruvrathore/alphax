@@ -28,8 +28,7 @@ public class TransactionDTO {
     private Date transactionTimestamp;
     @NotNull
     private String transactionUuid;
-    @NotNull
-    private String status;
+
     private TransactionMetadata transactionMetadata;
 
 }

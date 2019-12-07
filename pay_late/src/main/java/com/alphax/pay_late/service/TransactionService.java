@@ -22,8 +22,13 @@ public class TransactionService {
     private UserService userService;
 
     @Transactional
-    public Boolean saveTransaction(TransactionDTO transactionDTO) {
-        Transaction transaction = new Transaction();
+    public Boolean saveTransaction(TransactionDTO transactionDTO) throws Exception{
+
+        Transaction transaction = transactionRepository.getByTransactionUUid(transactionDTO.getTransactionUuid());
+        if(transaction!=null) {
+            return true;
+        }
+        transaction = new Transaction();
         transaction.setCreatedOn(new Date());
         transaction.setFromUserId(transactionDTO.getFromUserId());
         transaction.setToUserId(transactionDTO.getToUserId());
@@ -31,12 +36,12 @@ public class TransactionService {
         transaction.setTransactionTimestamp(transactionDTO.getTransactionTimestamp());
         transaction.setTransactionUUid(transactionDTO.getTransactionUuid());
         transaction.setMetadataObject(transactionDTO.getTransactionMetadata());
-        transaction.setStatus(TransactionStatus.fromName(transactionDTO.getStatus()));
+        transaction.setStatus(TransactionStatus.SUCCESS);
         transactionRepository.save(transaction);
         Boolean isDeductionSuccessful = userService.updateWalletBalance(transactionDTO.getFromUserId(), -transaction.getMoney());
         Boolean isAdditionSuccessful = userService.updateWalletBalance(transactionDTO.getToUserId(), transaction.getMoney());
         if(!isDeductionSuccessful || !isAdditionSuccessful) {
-            throw new RuntimeException();
+            throw new Exception("Insufficient Balance");
         }
         return true;
     }

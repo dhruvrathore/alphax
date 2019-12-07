@@ -39,8 +39,12 @@ import org.springframework.stereotype.Service;
         // decrypt the text
         cipher.init(Cipher.DECRYPT_MODE, aesKey);
         String decrypted = new String(cipher.doFinal(bb));
-        return objectMapper.readValue(decrypted, new TypeReference<Transaction>() {
-        });
+        try{
+            return objectMapper.readValue(decrypted, new TypeReference<Transaction>() {
+            });
+        }catch (Exception e){
+            return null;
+        }
 
     }
 }

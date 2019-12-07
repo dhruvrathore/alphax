@@ -25,6 +25,7 @@ public class TransactionService {
         transaction.setTransactionTimestamp(transactionDTO.getTransactionTimestamp());
         transaction.setTransactionUUid(transactionDTO.getTransactionUUid());
         transaction.setMetadataObject(transactionDTO.getTransactionMetadata());
+        transaction.setStatus(transactionDTO.getStatus());
         transactionRepository.save(transaction);
         return true;
     }
